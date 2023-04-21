@@ -31,11 +31,15 @@ class App extends React.Component{
     }
 
     var addOne = this.state.breakLength + 1;
+    if(!this.state.mode){
+      this.setState({
+        displayMin: addOne,
+        displaySeg: 0,
+        timer: addOne * 60
+      })
+    }
     this.setState({
       breakLength: addOne,
-      timer: addOne * 60,
-      displayMin: addOne,
-      displaySeg: 0
     })
   }
 
@@ -45,11 +49,15 @@ class App extends React.Component{
     }
 
     var decOne = this.state.breakLength - 1;
+    if(!this.state.mode){
+      this.setState({
+        displayMin: decOne,
+        displaySeg: 0,
+        timer: decOne * 60
+      })
+    }
     this.setState({
-      breakLength: decOne,
-      timer: decOne * 60,
-      displayMin: decOne,
-      displaySeg: 0
+      breakLength: decOne
     })
   }
 
@@ -58,11 +66,15 @@ class App extends React.Component{
       return undefined;
     }
     var addOne = this.state.sessionLength + 1;
+    if(this.state.mode){
+      this.setState({
+        displayMin: addOne,
+        displaySeg: 0,
+        timer: addOne * 60
+      })
+    }
     this.setState({
-      sessionLength: addOne,
-      timer: addOne * 60,
-      displayMin: addOne,
-      displaySeg: 0
+      sessionLength: addOne
     })
   }
 
@@ -71,11 +83,15 @@ class App extends React.Component{
       return undefined;
     }
     var decOne = this.state.sessionLength - 1;
+    if(this.state.mode){
+      this.setState({
+        displayMin: decOne,
+        displaySeg: 0,
+        timer: decOne * 60
+      })
+    }
     this.setState({
       sessionLength: decOne,
-      timer: decOne * 60,
-      displayMin: decOne,
-      displaySeg: 0
     })
   }
 
@@ -151,28 +167,40 @@ class App extends React.Component{
   render(){
     return(
       <div className="App">
-        <h1>Session Timer</h1>
-        <h2 id='break-label'>Break Length</h2>
-        <Button buttonId="break-decrement" icon="" clickHandler={this.decrementBreak}/>
-        <h2 id='break-length'>{this.state.breakLength}</h2>
-        <Button buttonId="break-increment" icon="" clickHandler={this.incrementBreak}/>
-        <h2 id='session-label'>Session Length</h2>
-        <Button buttonId="session-decrement" icon="" clickHandler={this.decrementSession}/>
-        <h2 id='session-length'>{this.state.sessionLength}</h2>
-        <Button buttonId="session-increment" icon="" clickHandler={this.incrementSession}/>
+        <h1 id='title'>Session/Break Timer</h1>
+        <div className='controlPanel'>
+          <h2 id='break-label'>Break Length</h2>
+          <h2 id='session-label'>Session Length</h2>
+          <div className='container'>
+            <p id='break-length'>{this.state.breakLength}</p>
+            <div className='buttonPanel'>
+              <Button buttonId="break-increment" icon="fa-solid fa-arrow-up fa-2xl" clickHandler={this.incrementBreak}/>
+              <Button buttonId="break-decrement" icon="fa-solid fa-arrow-down fa-2xl" clickHandler={this.decrementBreak}/>
+            </div>
+          </div>
+          <div className='container'>
+            <p id='session-length'>{this.state.sessionLength}</p>
+            <div className='buttonPanel'>
+              <Button buttonId="session-increment" icon="fa-solid fa-arrow-up fa-2xl" clickHandler={this.incrementSession}/>
+              <Button buttonId="session-decrement" icon="fa-solid fa-arrow-down fa-2xl" clickHandler={this.decrementSession}/>
+            </div>
+          </div>
+        </div>
+        <div className='startStopPanel'>
+          <Button buttonId="start_stop" icon={this.state.active ? "fa-solid fa-pause fa-2xl" : "fa-solid fa-play fa-2xl"} clickHandler={this.playPause}/>
+          <Button buttonId="reset" icon="fa-solid fa-arrows-spin fa-2xl" clickHandler={this.reset}/>
+        </div>
         <div className='timeContainer'>
           <audio id='beep' src="./alarm_sound.mp3"></audio>
           <h1 id='timer-label'>{this.state.mode ? "Session": "Break"}</h1>
-          <div id='time-left'>{this.state.displayMin.toLocaleString("en-US", { 
+          <div id='time-left'>
+            {this.state.displayMin.toLocaleString("en-US", { 
             minimumIntegerDigits: 2,
             useGrouping: false}) 
             + ":" + this.state.displaySeg.toLocaleString("en-US", { 
               minimumIntegerDigits: 2,
-              useGrouping: false})}</div>
-        </div>
-        <div className='controlPanel'>
-          <Button buttonId="start_stop" icon="" clickHandler={this.playPause}/>
-          <Button buttonId="reset" icon="" clickHandler={this.reset}/>
+              useGrouping: false})}
+          </div>
         </div>
       </div>
     );

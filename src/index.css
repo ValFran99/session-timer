@@ -1,14 +1,107 @@
 .button{
-  border: 1px solid black;
   width: 30px;
   height: 30px;
   cursor: pointer;
   display: inline-block;
 }
 
+.buttonPanel{
+  display: inline-block;
+  width: 30px;
+  height: fit-content;
+  margin-left: 150px;
+}
+
+#break-length, #session-length{
+  display: inline-block;
+  font-size: 30px;
+  text-align: center;
+  width: 30px;
+  margin-right: 10px;
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 10px;
+}
+
+.container{
+  width: 49%;
+  height: 100px;
+  display: inline-block;
+}
+
 .timeContainer{
-  border: 1px solid black;
+  border: 10px solid white;
   border-radius: 60px;
   width: 300px;
   height: 200px;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  user-select: none;
+  background-color: #8D89A6;
+}
+
+.App{
+  border: 5px solid #272838;
+  border-radius: 20px;
+  width: 500px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  background-color: #272838;
+  color: white;
+}
+
+h1{
+  text-align: center;
+}
+
+#break-label, #session-label{
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+
+.controlPanel{
+  height: 200px;
+}
+
+.timeContainer{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: auto;
+}
+
+.startStopPanel{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-left: 220px;
+}
+
+#time-left{
+  font-size: 100px;
+}
+
+@media(max-width: 625px){
+  .App{
+    width: 400px;
+  }
+
+  .startStopPanel{
+    margin-left: 170px;
+  }
+
+  .buttonPanel{
+    margin-left: 110px;
+  }
+
+  #break-length, #session-length{
+    margin-left: 70px;
+  }
 }
