@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/%7Bsession-timer%7D/static/css/main.9850ec2f.css",
-    "main.js": "/%7Bsession-timer%7D/static/js/main.5f70da64.js",
-    "index.html": "/%7Bsession-timer%7D/index.html",
-    "main.9850ec2f.css.map": "/%7Bsession-timer%7D/static/css/main.9850ec2f.css.map",
-    "main.5f70da64.js.map": "/%7Bsession-timer%7D/static/js/main.5f70da64.js.map"
+    "main.css": "/session-timer/static/css/main.9850ec2f.css",
+    "main.js": "/session-timer/static/js/main.5f70da64.js",
+    "index.html": "/session-timer/index.html",
+    "main.9850ec2f.css.map": "/session-timer/static/css/main.9850ec2f.css.map",
+    "main.5f70da64.js.map": "/session-timer/static/js/main.5f70da64.js.map"
   },
   "entrypoints": [
     "static/css/main.9850ec2f.css",
