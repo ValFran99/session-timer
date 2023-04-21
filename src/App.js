@@ -22,6 +22,7 @@ class App extends React.Component{
     this.countDown = this.countDown.bind(this);
     this.reset = this.reset.bind(this);
     this.changeMode = this.changeMode.bind(this);
+    this.playBeep = this.playBeep.bind(this);
   }
 
   incrementBreak(){
@@ -89,7 +90,7 @@ class App extends React.Component{
       if(this.state.timer === this.state.displayMin * 60){
         this.countDown()
       }
-      this.state.intervalId = setInterval(this.countDown, 100);
+      this.state.intervalId = setInterval(this.countDown, 1000);
       this.setState({
         active: true
       })
@@ -98,7 +99,6 @@ class App extends React.Component{
 
   countDown(){
     if(this.state.timer === -1){
-      // Acá yo debería meter un método que cree el contador contrario
       this.changeMode();
       return undefined;
     }
@@ -109,7 +109,15 @@ class App extends React.Component{
     })
   }
 
+  playBeep(){
+    let audioFile = document.getElementById("beep");
+    audioFile.pause();
+    audioFile.currentTime = 0;
+    audioFile.play();
+  }
+
   changeMode(){
+    this.playBeep();
     if(this.state.mode){
       this.setState({
         mode: !this.state.mode,
@@ -125,6 +133,9 @@ class App extends React.Component{
 
   reset(){
     clearInterval(this.state.intervalId);
+    let audioFile = document.getElementById("beep");
+    audioFile.pause();
+    audioFile.currentTime = 0;
     this.setState({
       breakLength: 5,
       sessionLength: 25,
@@ -136,8 +147,6 @@ class App extends React.Component{
     })
 
   }
-
-
 
   render(){
     return(
@@ -152,6 +161,7 @@ class App extends React.Component{
         <h2 id='session-length'>{this.state.sessionLength}</h2>
         <Button buttonId="session-increment" icon="" clickHandler={this.incrementSession}/>
         <div className='timeContainer'>
+          <audio id='beep' src="./alarm_sound.mp3"></audio>
           <h1 id='timer-label'>{this.state.mode ? "Session": "Break"}</h1>
           <div id='time-left'>{this.state.displayMin.toLocaleString("en-US", { 
             minimumIntegerDigits: 2,
